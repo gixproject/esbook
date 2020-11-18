@@ -1,0 +1,47 @@
+import os
+
+from flask import Flask
+from flask_migrate import Migrate
+from flask_migrate import MigrateCommand
+from flask_restplus import Api
+from flask_script import Manager
+
+from book.api.v1.router import books_api_v1
+from author.api.v1.router import authors_api_v1
+from config import config
+from db import db
+from esbook.commands.test_data import TestData
+
+app = Flask(__name__)
+
+environment = os.environ.get("FLASK_ENV", "development")
+app.config.from_object(config[environment])
+
+db.init_app(app)
+Migrate(app, db)
+
+api = Api(
+    app=app,
+    doc="/",
+    title="ESbook API",
+    version="0.1",
+    contact_url="https://github.com/gixproject",
+    contact="gixproject",
+    license_url="https://github.com/gixproject/esbook/blob/develop/LICENSE",
+    license="Apache 2.0",
+    ordered=True,
+    description="The REST API platform that provides search within millions of books. "
+                "The functionality allows you to retrieve data for a period or just by one author.",
+)
+
+# Register namespaces
+api.add_namespace(books_api_v1, path="/v1/books/")
+api.add_namespace(authors_api_v1, path="/v1/authors/")
+
+manager = Manager(app)
+Migrate(app, db)
+manager.add_command("db", MigrateCommand)
+manager.add_command("apply_test_data", TestData())
+
+if __name__ == "__main__":
+    manager.run()
