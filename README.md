@@ -15,6 +15,14 @@ Run the project in four simple steps:
 
 Pay attention that database setting already has defaults values.
 
+## Useful actions
+### Commands
+Configure the project with a test data:  
+`docker-compose exec web python manage.py apply_test_data`  
+
+Migrate existing books to ElasticSearch:  
+`docker-compose exec web python manage.py migrate_books_to_es`  
+
 ## Additional info
 #### Libraries and tools
 * Docker + compose

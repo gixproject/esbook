@@ -62,11 +62,12 @@ class BooksView(APIView):
     @books_api_v1.doc(
         params=get_pagination_request_params(),
     )
+    @books_api_v1.deprecated
     def get(self):
         """
-        Returns a list of books.
+        Returns a list of books in a random order.
         """
-        books = Book.query.order_by("created_at")
+        books = Book.query.all()
         paginated_queryset = self.paginate_queryset(books)
         serialized_data = BookModelSchema(many=True).dump(paginated_queryset)
 

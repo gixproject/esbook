@@ -21,3 +21,13 @@ class BookModelSchema(ma.SQLAlchemyAutoSchema):
         exclude = ("updated_at",)
         model = Book
         include_fk = True
+
+
+class BookElasticSchema(BookModelSchema):
+    source_id = fields.UUID(attribute="id")
+    updated_at = fields.DateTime("%Y-%m-%d %H:%M:%S")
+
+    class Meta:
+        exclude = ("price", "copyright", "language", "id", "created_at", "type")
+        model = Book
+        include_fk = True
