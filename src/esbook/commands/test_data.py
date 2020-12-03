@@ -1,8 +1,14 @@
+import logging
+
 from faker import Faker
 from flask_script import Command, Option
 
 from author.models import Author
+from author.services import save_author_to_es
 from book.models import Book, Genre
+from book.services import save_book_to_es
+
+logger = logging.getLogger(__name__)
 
 
 class TestData(Command):
@@ -25,9 +31,14 @@ class TestData(Command):
 
             for _ in range(faker.random_digit()):
                 author = Author(given_name=faker.first_name(), family_name=faker.last_name())
+                author.save()
+                save_author_to_es(author)
                 book.authors.append(author)
 
-            genre = Genre.get_or_create(name="tech")
+            genre = Genre.get_or_create(name="fake")
             book.genres.append(genre)
 
             book.save()
+            save_book_to_es(book)
+
+        logger.info('Test data was successfully created.')

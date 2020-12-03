@@ -13,7 +13,7 @@ services:
     ports:
       - "127.0.0.1:9200:9200"
     volumes:
-      - elasticsearch_data_vol:/usr/share/elasticsearch/library_app/data
+      - elasticsearch_data_vol:/usr/share/elasticsearch/data
     environment:
       - http.host=0.0.0.0
       - transport.host=localhost
