@@ -26,14 +26,14 @@ api = Api(
     app=app,
     doc="/",
     title="ESbook API",
-    version="0.1",
+    version="0.2",
     contact_url="https://github.com/gixproject",
     contact="gixproject",
     license_url="https://github.com/gixproject/esbook/blob/develop/LICENSE",
     license="Apache 2.0",
     ordered=True,
     description="The REST API platform that provides search within millions of books. "
-                "The functionality allows you to retrieve data for a period or just by one author.",
+    "The functionality allows you to retrieve data for a period or just by one author.",
 )
 
 # Register namespaces

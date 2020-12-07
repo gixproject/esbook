@@ -1,7 +1,6 @@
 import unittest
 
 from manage import app, db
-from config import config
 
 
 class TestCase(unittest.TestCase):
@@ -10,14 +9,20 @@ class TestCase(unittest.TestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.app = app
-        cls.app.config.from_object(config["testing"])
         cls.client = cls.app.test_client()
-        cls.app.app_context().push()
+        cls._ctx = cls.app.test_request_context()
+        cls._ctx.push()
         db.init_app(cls.app)
-        db.create_all()
 
     @classmethod
     def tearDownClass(cls):
+        super().tearDownClass()
+        db.get_engine(cls.app).dispose()
+        cls._ctx.pop()
+
+    def setUp(self):
+        db.create_all()
+
+    def tearDown(self):
         db.session.remove()
         db.drop_all()
-        super().tearDownClass()

@@ -10,6 +10,7 @@ class IdMixin:
     """
     Mixin for unique UUID primary key.
     """
+
     id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
 
 
@@ -17,8 +18,11 @@ class CreatedUpdatedMixin:
     """
     Mixin for timestamp values.
     """
+
     created_at = db.Column(db.DateTime, default=datetime.utcnow())
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow(), onupdate=datetime.utcnow())
+    updated_at = db.Column(
+        db.DateTime, default=datetime.utcnow(), onupdate=datetime.utcnow()
+    )
 
 
 class CRUDMixin:

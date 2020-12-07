@@ -11,7 +11,6 @@ search_api_v1 = Namespace("Search", ordered=True)
 
 
 class SearchBooksView(APIView):
-
     @search_api_v1.expect(search_request_parser())
     def get(self):
         """
@@ -28,7 +27,6 @@ class SearchBooksView(APIView):
 
 
 class SearchAuthorsView(APIView):
-
     @search_api_v1.expect(search_request_parser())
     def get(self):
         """

@@ -1,6 +1,6 @@
 from flask_restplus import Namespace
 from flask_restplus._http import HTTPStatus
-
+from sqlalchemy.sql.expression import func
 from author.schemes import AuthorModelSchema
 from book.models import Book, Genre
 from book.schemes import BookModelSchema
@@ -10,10 +10,11 @@ books_api_v1 = Namespace("Books", description="Books related operations.", order
 
 
 class BookView(APIView):
-
-    @books_api_v1.doc(responses={
-        HTTPStatus.NOT_FOUND: HTTPStatus.NOT_FOUND.phrase,
-    })
+    @books_api_v1.doc(
+        responses={
+            HTTPStatus.NOT_FOUND: HTTPStatus.NOT_FOUND.phrase,
+        }
+    )
     def get(self, pk):
         """
         Get a book object.
@@ -23,10 +24,11 @@ class BookView(APIView):
 
 
 class BookAuthorsView(APIView):
-
-    @books_api_v1.doc(responses={
-        HTTPStatus.NOT_FOUND: HTTPStatus.NOT_FOUND.phrase,
-    })
+    @books_api_v1.doc(
+        responses={
+            HTTPStatus.NOT_FOUND: HTTPStatus.NOT_FOUND.phrase,
+        }
+    )
     def get(self, pk):
         """
         Get a book authors.
@@ -39,7 +41,6 @@ class BookAuthorsView(APIView):
 
 
 class GenreBooksView(APIView):
-
     @books_api_v1.doc(
         responses={
             HTTPStatus.NOT_FOUND: HTTPStatus.NOT_FOUND.phrase,
@@ -58,7 +59,6 @@ class GenreBooksView(APIView):
 
 
 class BooksView(APIView):
-
     @books_api_v1.doc(
         params=get_pagination_request_params(),
     )
@@ -67,7 +67,7 @@ class BooksView(APIView):
         """
         Returns a list of books in a random order.
         """
-        books = Book.query.all()
+        books = Book.query.order_by(func.random())
         paginated_queryset = self.paginate_queryset(books)
         serialized_data = BookModelSchema(many=True).dump(paginated_queryset)
 

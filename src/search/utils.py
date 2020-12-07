@@ -9,7 +9,6 @@ logger = logging.getLogger(__name__)
 
 
 class ElasticSearchObject(Elasticsearch):
-
     def get_client(self) -> Elasticsearch:
         """
         Returns Elasticsearch instance.
@@ -42,14 +41,9 @@ def build_search_query(query, page, per_page) -> dict:
     :param int per_page:
     """
     search_query = {
-        'query': {
-            'multi_match': {
-                'query': query,
-                'fields': ['*']
-            }
-        },
-        'from': (page - 1) * per_page,
-        'size': per_page
+        "query": {"multi_match": {"query": query, "fields": ["*"]}},
+        "from": (page - 1) * per_page,
+        "size": per_page,
     }
 
     return search_query
@@ -60,7 +54,7 @@ def get_search_hits(search_results) -> list:
     Returns a list of `_source` results.
     :param dict search_results:
     """
-    return [hit["_source"] for hit in search_results['hits']['hits']]
+    return [hit["_source"] for hit in search_results["hits"]["hits"]]
 
 
 def get_paginated_response(search_results, page, per_page) -> dict:
@@ -70,17 +64,17 @@ def get_paginated_response(search_results, page, per_page) -> dict:
     :param int per_page:
     :param dict search_results:
     """
-    count = search_results['hits']['total']['value']
+    count = search_results["hits"]["total"]["value"]
     results = get_search_hits(search_results)
     pages_count = max(1, count / per_page) if results else 0
     page = page if results else 0
 
     response = {
-        'page': page,
-        'pages_count': pages_count,
-        'per_page': per_page,
-        'count': count,
-        'results': results,
+        "page": page,
+        "pages_count": pages_count,
+        "per_page": per_page,
+        "count": count,
+        "results": results,
     }
 
     return response
