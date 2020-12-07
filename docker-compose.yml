@@ -36,7 +36,6 @@ services:
   postgres:
     image: postgres:latest
     restart: always
-    container_name: postgres
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
     ports:
@@ -46,7 +45,6 @@ services:
 
   web:
     image: esbook
-    container_name: web
     build: .
     restart: always
     env_file: .env

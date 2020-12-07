@@ -5,11 +5,12 @@ from author.models import Author
 from book.schemes import BookModelSchema
 from esbook.helpers import get_pagination_request_params, APIView
 
-authors_api_v1 = Namespace("Authors", description="Authors related operations.", ordered=True)
+authors_api_v1 = Namespace(
+    "Authors", description="Authors related operations.", ordered=True
+)
 
 
 class AuthorBooksView(APIView):
-
     @authors_api_v1.doc(
         responses={
             HTTPStatus.NOT_FOUND: HTTPStatus.NOT_FOUND.phrase,

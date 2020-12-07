@@ -10,7 +10,6 @@ logger = logging.getLogger(__name__)
 
 
 class MigrateBooks(Command):
-
     def run(self):
         """
         Migrates books and their authors to ElasticSearch.
@@ -21,4 +20,6 @@ class MigrateBooks(Command):
             for author in book.authors.all():
                 save_author_to_es(author)
 
-        logger.info('Books and their authors were successfully migrated to ElasticSearch.')
+        logger.info(
+            "Books and their authors were successfully migrated to ElasticSearch."
+        )

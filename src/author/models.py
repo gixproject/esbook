@@ -15,7 +15,9 @@ class Author(db.Model, IdMixin, CreatedUpdatedMixin, CRUDMixin):
         Returns formatted author name.
         """
         if self.middle_name:
-            full_name = "{} {} {}".format(self.given_name, self.middle_name, self.family_name)
+            full_name = "{} {} {}".format(
+                self.given_name, self.middle_name, self.family_name
+            )
         else:
             full_name = "{} {}".format(self.given_name, self.family_name)
 

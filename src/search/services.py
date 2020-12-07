@@ -29,24 +29,21 @@ def es_search(index, model, query, page, per_page) -> dict:
     }
 
     search_results = es_client.search(
-        index=index,
-        body=build_search_query(query=query, page=page, per_page=per_page)
+        index=index, body=build_search_query(query=query, page=page, per_page=per_page)
     )
     paginated_results = get_paginated_response(
-        search_results=search_results,
-        page=page,
-        per_page=per_page
+        search_results=search_results, page=page, per_page=per_page
     )
     results = []
 
-    for result in paginated_results['results']:
+    for result in paginated_results["results"]:
         try:
-            entity = model.query.get(result['source_id'])
+            entity = model.query.get(result["source_id"])
             results.append(schemas[model].dump(obj=entity))
         except NoResultFound as exc:
             logger.warning(exc)
             pass
 
-    paginated_results['results'] = results
+    paginated_results["results"] = results
 
     return paginated_results

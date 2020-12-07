@@ -15,7 +15,10 @@ def save_book_to_es(book) -> None:
     :param Author book: A `Book` instance.
     """
     if not book.authors.count():
-        logger.info(f"Book with id {book.id} has no authors. It can't be saved in ElasticSearch.")
+        logger.warning(
+            f"Book with id {book.id} has no authors. "
+            f"It can't be saved in ElasticSearch."
+        )
         return
 
     es_client = ElasticSearchObject().get_client()
