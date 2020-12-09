@@ -35,4 +35,4 @@ def tests(ctx, path=None):
 
     # Runs tests
     test_path = f"../tests/{path}"
-    pytest.main([test_path])
+    pytest.main([test_path, "--cov"])

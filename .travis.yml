@@ -17,8 +17,12 @@ before_install:
 
 before_script:
   - cp .env.dist .env
+  - echo COVERALLS_REPO_TOKEN=${COVERALLS_REPO_TOKEN} >> .env
   - docker-compose up -d --build web
 
 script:
   - docker-compose exec web invoke tests --path ''
   - docker-compose exec web flake8
+
+after_success:
+  - docker-compose exec web coveralls

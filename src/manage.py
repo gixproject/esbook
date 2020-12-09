@@ -13,6 +13,7 @@ from config import config
 from db import db
 from esbook.commands.test_data import TestData
 from esbook.commands.migrate_books_to_es import MigrateBooks
+from esbook.commands.helpers import ShowUrls, DatabaseRecreate
 
 app = Flask(__name__)
 
@@ -46,6 +47,8 @@ Migrate(app, db)
 manager.add_command("db", MigrateCommand)
 manager.add_command("apply_test_data", TestData())
 manager.add_command("migrate_books_to_es", MigrateBooks())
+manager.add_command("show_urls", ShowUrls())
+manager.add_command("reset_db", DatabaseRecreate())
 
 if __name__ == "__main__":
     manager.run()

@@ -1,7 +1,10 @@
+# directories
 __pycache__/
 .pytest_cache/
 *.egg-info
-:memory
 .idea/
-.env
 migrations/
+
+# files
+.coverage
+.env

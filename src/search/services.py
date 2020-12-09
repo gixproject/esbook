@@ -6,7 +6,7 @@ from author.models import Author
 from author.schemes import AuthorModelSchema
 from book.models import Book
 from book.schemes import BookModelSchema
-from search.utils import ElasticSearchObject, build_search_query, get_paginated_response
+from search.utils import ElasticSearch, build_search_query, get_paginated_response
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +21,7 @@ def es_search(index, model, query, page, per_page) -> dict:
     :param int page:
     :param int per_page:
     """
-    es_client = ElasticSearchObject().get_client()
+    es_client = ElasticSearch()
 
     schemas = {
         Book: BookModelSchema(),
