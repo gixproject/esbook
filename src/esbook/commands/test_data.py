@@ -13,12 +13,10 @@ logger = logging.getLogger(__name__)
 
 
 class TestData(Command):
+    __doc__ = "Creates test database records."
     option_list = (Option("--count", "-c", dest="count", default=50, type=int),)
 
     def run(self, count):
-        """
-        Creates test records.
-        """
         faker = Faker()
 
         for _ in range(count):

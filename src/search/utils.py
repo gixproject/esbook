@@ -8,26 +8,24 @@ from search.mapping import get_indexes
 logger = logging.getLogger(__name__)
 
 
-class ElasticSearchObject(Elasticsearch):
-    def get_client(self) -> Elasticsearch:
+class ElasticSearch(Elasticsearch):
+    def __init__(self, *args, **kwargs):
         """
-        Returns Elasticsearch instance.
+        Overrides ElasticSearch instance initialize with correct URI.
         """
-        client = Elasticsearch(current_app.config["ELASTICSEARCH_URI"])
-        self.create_indexes(client=client)
+        kwargs.update(hosts=current_app.config["ELASTICSEARCH_URI"])
+        super(ElasticSearch, self).__init__(*args, **kwargs)
+        self.create_indexes()
 
-        return client
-
-    def create_indexes(self, client) -> None:
+    def create_indexes(self) -> None:
         """
         Creates indexes within Elasticsearch.
-        :param Elasticsearch client: Elasticsearch instance
         """
         indexes = get_indexes()
         for index_name, index_body in indexes.items():
             try:
-                if not client.indices.exists(index_name):
-                    client.indices.create(index=index_name, body=index_body)
+                if not self.indices.exists(index_name):
+                    self.indices.create(index=index_name, body=index_body)
                     logger.info("Created Index for %s.", index_name)
             except Exception as ex:
                 logger.error(ex)

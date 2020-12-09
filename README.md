@@ -1,5 +1,9 @@
 # ESbook
 
+[![Build Status](https://travis-ci.org/gixproject/esbook.svg)](https://travis-ci.org/gixproject/esbook)
+[![Coverage Status](https://coveralls.io/repos/github/gixproject/esbook/badge.svg)](https://coveralls.io/github/gixproject/esbook)
+[![Code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+
 ## Basics
 The REST API service that provides search within millions of books.  
 API represents results in a suitable JSON format that can be helpful to other developers and sales companies.  
@@ -19,11 +23,20 @@ Pay attention that the config file already has defaults values
 
 ## Useful actions
 ### Commands
+**To run commands use** `docker-compose exec web` to execute environment  
+To see all commands type `python manage.py`  
+
 Configure the project with test data:  
-`docker-compose exec web python manage.py apply_test_data`  
+`manage.py apply_test_data`
 
 Migrate existing books to ElasticSearch:  
-`docker-compose exec web python manage.py migrate_books_to_es`  
+`python manage.py migrate_books_to_es`
+
+To see all URL's:  
+`python manage.py show_urls`
+
+To recreate database schema use:  
+`python manage.py reset_db`
 
 ### Make commands support
 For details type `make help`  

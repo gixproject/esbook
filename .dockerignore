@@ -1,8 +1,11 @@
-Docker*
-docker*
+# directories
 .git
 __pycache__/
 .pytest_cache/
 *.egg-info
-:memory
 .idea
+
+# files
+Docker*
+docker*
+.coverage

@@ -4,7 +4,7 @@ from elasticsearch.exceptions import TransportError
 from flask import current_app
 
 from author.schemes import AuthorElasticSchema
-from search.services import ElasticSearchObject
+from search.services import ElasticSearch
 
 logger = logging.getLogger(__name__)
 
@@ -14,7 +14,7 @@ def save_author_to_es(author) -> None:
     Stores an `Author` instance into ElasticSearch.
     :param Author author: An `Author` instance.
     """
-    es_client = ElasticSearchObject().get_client()
+    es_client = ElasticSearch()
 
     try:
         es_client.index(

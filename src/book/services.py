@@ -4,7 +4,7 @@ from elasticsearch.exceptions import TransportError
 from flask import current_app
 
 from book.schemes import BookElasticSchema
-from search.services import ElasticSearchObject
+from search.services import ElasticSearch
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +21,7 @@ def save_book_to_es(book) -> None:
         )
         return
 
-    es_client = ElasticSearchObject().get_client()
+    es_client = ElasticSearch()
 
     try:
         es_client.index(
