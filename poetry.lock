@@ -21,6 +21,22 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "apispec"
+version = "4.0.0"
+description = "A pluggable API specification generator. Currently supports the OpenAPI Specification (f.k.a. the Swagger specification)."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.extras]
+dev = ["PyYAML (>=3.10)", "prance[osv] (>=0.11)", "marshmallow (>=3.0.0)", "pytest", "mock", "flake8 (==3.8.3)", "flake8-bugbear (==20.1.4)", "pre-commit (>=2.4,<3.0)", "tox"]
+docs = ["marshmallow (>=3.0.0)", "pyyaml (==5.3.1)", "sphinx (==3.2.1)", "sphinx-issues (==1.2.0)", "sphinx-rtd-theme (==0.5.0)"]
+lint = ["flake8 (==3.8.3)", "flake8-bugbear (==20.1.4)", "pre-commit (>=2.4,<3.0)"]
+tests = ["PyYAML (>=3.10)", "prance[osv] (>=0.11)", "marshmallow (>=3.0.0)", "pytest", "mock"]
+validation = ["prance[osv] (>=0.11)"]
+yaml = ["PyYAML (>=3.10)"]
+
+[[package]]
 name = "appdirs"
 version = "1.4.4"
 description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
@@ -796,7 +812,7 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "1.1"
 python-versions = "3.8.2"
-content-hash = "307554333919223aad140be2d4aac256a6b8c33f96adfaa33c90d22724b931b3"
+content-hash = "5f2237608f2e7c0ae9a79cf87e4f0ddcacc88cc0808eb2fe0759fd19fbe8ae76"
 
 [metadata.files]
 alembic = [
@@ -806,6 +822,10 @@ alembic = [
 aniso8601 = [
     {file = "aniso8601-8.0.0-py2.py3-none-any.whl", hash = "sha256:c033f63d028b9a58e3ab0c2c7d0532ab4bfa7452bfc788fbfe3ddabd327b181a"},
     {file = "aniso8601-8.0.0.tar.gz", hash = "sha256:529dcb1f5f26ee0df6c0a1ee84b7b27197c3c50fc3a6321d66c544689237d072"},
+]
+apispec = [
+    {file = "apispec-4.0.0-py2.py3-none-any.whl", hash = "sha256:20d271f7c8d130719be223fdb122af391ff8d59fb24958c793f632305b87f8ed"},
+    {file = "apispec-4.0.0.tar.gz", hash = "sha256:360e28e5e84a4d7023b16de2b897327fe3da63ddc8e01f9165b9113b7fe1c48a"},
 ]
 appdirs = [
     {file = "appdirs-1.4.4-py2.py3-none-any.whl", hash = "sha256:a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"},

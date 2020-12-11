@@ -1,12 +1,15 @@
 from flask_restplus import Namespace
 from flask_restplus._http import HTTPStatus
 from sqlalchemy.sql.expression import func
+
 from author.schemes import AuthorModelSchema
 from book.models import Book, Genre
 from book.schemes import BookModelSchema
+from book.schemes import book_json_schema
 from esbook.helpers import APIView, get_pagination_request_params
 
 books_api_v1 = Namespace("Books", description="Books related operations.", ordered=True)
+book_schema_model = books_api_v1.schema_model("BookModel", book_json_schema)
 
 
 class BookView(APIView):
@@ -15,6 +18,7 @@ class BookView(APIView):
             HTTPStatus.NOT_FOUND: HTTPStatus.NOT_FOUND.phrase,
         }
     )
+    @books_api_v1.response(HTTPStatus.OK, HTTPStatus.OK.phrase, book_schema_model)
     def get(self, pk):
         """
         Get a book object.
