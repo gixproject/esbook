@@ -11,7 +11,6 @@ class AuthorModelSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         exclude = ("updated_at",)
         model = Author
-        include_fk = True
 
 
 class AuthorElasticSchema(AuthorModelSchema):
@@ -21,4 +20,3 @@ class AuthorElasticSchema(AuthorModelSchema):
     class Meta:
         exclude = ("id", "created_at")
         model = Author
-        include_fk = True

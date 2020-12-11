@@ -1,3 +1,5 @@
+from apispec.ext.marshmallow import OpenAPIConverter
+from apispec.utils import OpenAPIVersion
 from flask import app
 from flask_marshmallow import Marshmallow
 from marshmallow import fields
@@ -31,3 +33,17 @@ class BookElasticSchema(BookModelSchema):
         exclude = ("price", "copyright", "language", "id", "created_at", "type")
         model = Book
         include_fk = True
+
+
+# JSON schema for a book
+book_json_schema = OpenAPIConverter(
+    OpenAPIVersion(openapi_version="2.0"), schema_name_resolver=None, spec=None
+).schema2jsonschema(schema=BookModelSchema(exclude=("authors", "genres")))
+book_json_schema["properties"]["authors"] = {
+    "type": "array",
+    "items": {"type": "string"},
+}
+book_json_schema["properties"]["genres"] = {
+    "type": "array",
+    "items": {"type": "string"},
+}
