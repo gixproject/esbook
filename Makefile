@@ -6,6 +6,7 @@ test: ## Run tests
 
 lint: ## Run linter for app folder
 	docker-compose -f $(or $(DOCKER_COMPOSE_FILE), docker-compose.yml) exec web flake8
+	docker-compose -f $(or $(DOCKER_COMPOSE_FILE), docker-compose.yml) exec web black /code/src/
 
 up: ## Start all or c=<name> containers in foreground
 	docker-compose -f $(or $(DOCKER_COMPOSE_FILE), docker-compose.yml) up $(c)

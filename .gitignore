@@ -8,3 +8,4 @@ migrations/
 # files
 .coverage
 .env
+esbook.log

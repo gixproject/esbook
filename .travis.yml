@@ -23,6 +23,7 @@ before_script:
 script:
   - docker-compose exec web invoke tests --path ''
   - docker-compose exec web flake8
+  - docker-compose exec web black /code/src/
 
 after_success:
   - docker-compose exec web coveralls

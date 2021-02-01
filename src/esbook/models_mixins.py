@@ -1,7 +1,7 @@
 import uuid
-from datetime import datetime
 
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.sql import func
 
 from db import db
 
@@ -19,10 +19,8 @@ class CreatedUpdatedMixin:
     Mixin for timestamp values.
     """
 
-    created_at = db.Column(db.DateTime, default=datetime.utcnow())
-    updated_at = db.Column(
-        db.DateTime, default=datetime.utcnow(), onupdate=datetime.utcnow()
-    )
+    created_at = db.Column(db.DateTime, server_default=func.now())
+    updated_at = db.Column(db.DateTime, server_onupdate=func.now())
 
 
 class CRUDMixin:

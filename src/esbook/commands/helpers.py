@@ -19,6 +19,10 @@ class DatabaseRecreate(Command):
     __doc__ = "Deletes database tables and creates again."
 
     def run(self):
+        """
+        Use only for development purposes.
+        """
         db.session.remove()
         db.drop_all()
         db.create_all()
+        db.session.commit()

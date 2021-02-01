@@ -4,11 +4,24 @@
 [![Coverage Status](https://coveralls.io/repos/github/gixproject/esbook/badge.svg)](https://coveralls.io/github/gixproject/esbook)
 [![Code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
-## Basics
-The REST API service that provides search within millions of books.  
-API represents results in a suitable JSON format that can be helpful to other developers and sales companies.  
-The functionality allows you to retrieve data for a period or just by one author. 
-Periodical updates help to keep the data fresh. API uses the Python programming language as the ideal solution for processing, parsing, updating a big amount of data.
+## Description
+The boilerplate Flask application that provides search within books.
+
+The API represents results in a suitable JSON format that can be helpful to other developers and companies.  
+It allows you to retrieve data for a period or just by one author. 
+Periodical updates help to keep the data fresh.  
+
+### Libraries and tools
+* Docker + compose
+* Poetry package manager
+* Flask Framework
+* Flask-restplus
+* PostgreSQL
+* SQLAlchemy
+* ElasticSearch
+* gunicorn 
+* unittest + pytest
+* invoke
 
 ## Setup
 Make sure **Docker** is installed on your system
@@ -44,15 +57,3 @@ For details type `make help`
 ### Testing
 Run tests `make test`  
 Run lint `make lint`
-
-## Additional info
-#### Libraries and tools
-* Docker + compose
-* Poetry package manager
-* Flask Framework
-* Flask-restplus
-* PostgreSQL
-* SQLAlchemy
-* ElasticSearch
-* unittest + pytest
-* invoke

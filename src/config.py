@@ -1,40 +1,12 @@
 import os
 from logging.config import dictConfig
 
-logging_config = {
-    "version": 1,
-    "formatters": {
-        "default": {
-            "format": "[%(asctime)s] %(levelname)s in %(module)s: %(message)s",
-            "datefmt": "%Y-%m-%d %H:%M:%S",
-        }
-    },
-    "handlers": {
-        "console": {
-            "class": "logging.StreamHandler",
-            "formatter": "default",
-            "stream": "ext://sys.stdout",
-            "level": os.environ.get("LOG_LEVEL", "INFO"),
-        }
-    },
-    "loggers": {
-        "": {
-            "level": os.environ.get("LOG_LEVEL", "INFO"),
-            "propagate": True,
-            "handlers": ["console"],
-        },
-    },
-    "disable_existing_loggers": False,
-}
-
 
 class Config:
-    DEBUG = True
-    CSRF_ENABLED = True
-    SECRET_KEY = "top-secret"
-    SQLALCHEMY_TRACK_MODIFICATIONS = False  # silence the deprecation warning
+    DEBUG = False
+    SECRET_KEY = os.environ.get("SECRET_KEY", os.urandom(16))
     RESTPLUS_VALIDATE = True
-    dictConfig(logging_config)
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Swagger
     SWAGGER_UI_DOC_EXPANSION = "list"
@@ -56,21 +28,54 @@ class Config:
 
 
 class ProductionConfig(Config):
-    DEBUG = False
+    SESSION_COOKIE_SECURE = True
 
 
 class DevelopmentConfig(Config):
+    DEBUG = True
     SWAGGER_UI_REQUEST_DURATION = True
 
 
 class TestConfig(Config):
     TESTING = True
-    CSRF_ENABLED = False
     DB_NAME = f"{Config.DB_NAME}_test"
     SQLALCHEMY_DATABASE_URI = "postgresql://{}:{}@{}/{}".format(
         Config.DB_USER, Config.DB_PASSWORD, Config.DB_HOST, DB_NAME
     )
 
+
+dictConfig(
+    {
+        "version": 1,
+        "formatters": {
+            "default": {
+                "format": "[%(asctime)s] %(levelname)s in "
+                "%(pathname)s:%(lineno)d %(message)s",
+                "datefmt": "%Y-%m-%d %H:%M:%S",
+            }
+        },
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+                "formatter": "default",
+                "stream": "ext://flask.logging.wsgi_errors_stream",
+                "level": os.environ.get("LOG_LEVEL", "INFO"),
+            },
+            "file": {
+                "class": "logging.FileHandler",
+                "level": os.environ.get("LOG_LEVEL", "WARNING"),
+                "formatter": "default",
+                "filename": os.environ.get("LOG_PATH", "esbook.log"),
+                "mode": "a",
+            },
+        },
+        "root": {
+            "level": os.environ.get("LOG_LEVEL", "WARNING"),
+            "handlers": ["console", "file"],
+        },
+        "disable_existing_loggers": False,
+    }
+)
 
 config = {
     "development": DevelopmentConfig,
