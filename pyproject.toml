@@ -1,15 +1,16 @@
 [tool.poetry]
 name = "esbook"
-version = "0.2.0"
+version = "0.5.0"
 description = "The REST API platform that provides search within millions of books."
 authors = ["gixproject <viacheslavlab@gmail.com>"]
 
 [tool.black]
 line-length = 88
 target-version = ["py38"]
-exclude = """__pycache__"""
+exclude = """__pycache__|migrations"""
 diff = 1
 color = 1
+check = 1
 
 [tool.poetry.dependencies]
 python = "3.8.2"
@@ -30,6 +31,7 @@ Faker = "^4.16.0"
 factory-boy = "3.0.1"
 invoke = "^1.4.1"
 coveralls = "^2.2.0"
+gunicorn = "^20.0.4"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.5.3"

@@ -17,7 +17,7 @@ def get_indexes():
                 "dynamic": "strict",
                 "properties": {
                     "source_id": {
-                        "type": "text"
+                        "type": "text",
                     },
                     "title": {
                         "type": "text",
@@ -25,17 +25,17 @@ def get_indexes():
                     },
                     "updated_at": {
                         "type": "date",
-                        "format": "yyyy-MM-dd HH:mm:ss"
+                        "format": "yyyy-MM-dd HH:mm:ss",
                     },
                     "publication_date": {
                         "type": "date",
-                        "format": "yyyy-MM-dd"
+                        "format": "yyyy-MM-dd",
                     },
                     "issn": {
-                        "type": "text"
+                        "type": "text",
                     },
                     "isbn": {
-                        "type": "text"
+                        "type": "text",
                     },
                     "publisher": {
                         "type": "text",
@@ -56,8 +56,8 @@ def get_indexes():
                     "pages": {
                         "type": "integer",
                     },
-                }
-            }
+                },
+            },
         },
         config["ELASTIC_AUTHORS_INDEX"]: {
             "settings": {
@@ -68,11 +68,11 @@ def get_indexes():
                 "dynamic": "strict",
                 "properties": {
                     "source_id": {
-                        "type": "text"
+                        "type": "text",
                     },
                     "updated_at": {
                         "type": "date",
-                        "format": "yyyy-MM-dd HH:mm:ss"
+                        "format": "yyyy-MM-dd HH:mm:ss",
                     },
                     "given_name": {
                         "type": "text",
@@ -86,9 +86,9 @@ def get_indexes():
                         "type": "text",
                         "fielddata": True,
                     },
-                }
-            }
-        }
+                },
+            },
+        },
     }
 
     return indexes

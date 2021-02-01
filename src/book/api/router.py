@@ -1,4 +1,4 @@
-from book.api.v1.views import (
+from book.api.views import (
     books_api_v1,
     BookView,
     BooksView,
