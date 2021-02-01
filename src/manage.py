@@ -11,6 +11,7 @@ from book.api.router import books_api_v1
 from config import config
 from db import db
 from esbook.commands.helpers import ShowUrls, DatabaseRecreate
+from esbook.commands.import_books_from_elsevier import ElsevierScraper
 from esbook.commands.migrate_books_to_es import MigrateBooks
 from esbook.commands.test_data import TestData
 from search.api.router import search_api_v1
@@ -46,8 +47,9 @@ api.add_namespace(search_api_v1, path="/v1/search/")
 
 # Register commands
 manager.add_command("db", MigrateCommand)
-manager.add_command("apply_test_data", TestData())
+manager.add_command("test_data", TestData())
 manager.add_command("migrate_books_to_es", MigrateBooks())
+manager.add_command("import_books_from_elsevier", ElsevierScraper())
 manager.add_command("show_urls", ShowUrls())
 manager.add_command("recreate_db", DatabaseRecreate())
 

@@ -5,7 +5,9 @@ from db import db
 
 
 class ShowUrls(Command):
-    __doc__ = "Shows all current routes and their endpoint names."
+    """
+    Shows all current routes and their endpoint names.
+    """
 
     def run(self):
         urls = []
@@ -16,7 +18,9 @@ class ShowUrls(Command):
 
 
 class DatabaseRecreate(Command):
-    __doc__ = "Deletes database tables and creates again."
+    """
+    Deletes database tables and creates again.
+    """
 
     def run(self):
         """

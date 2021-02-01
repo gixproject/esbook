@@ -28,6 +28,15 @@ class BookElasticSchema(BookModelSchema):
     updated_at = fields.DateTime("%Y-%m-%d %H:%M:%S")
 
     class Meta:
-        exclude = ("price", "copyright", "language", "id", "created_at", "type")
+        exclude = (
+            "price",
+            "copyright",
+            "language",
+            "id",
+            "created_at",
+            "url",
+            "source",
+            "doi",
+        )
         model = Book
         include_fk = True

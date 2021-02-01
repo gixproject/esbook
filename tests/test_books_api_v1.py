@@ -9,9 +9,10 @@ class BookDetailTest(TestCase):
     def setUp(self):
         super(BookDetailTest, self).setUp()
         self.book = BookFactory(
-            title="Python Tricks", subtitle="A Buffet of Awesome Python Features", type="Book",
-            publication_date="2017-10-25", language="English", description="...", isbn="isbn",
-            pages=301, price=29.99, publisher="Dan Bader",
+            title="Python Tricks", subtitle="A Buffet of Awesome Python Features",
+            publication_date="2017-10-25", language="English", description="...",
+            isbn="isbn", pages=301, price=29.99, publisher="Dan Bader", issn=None,
+            url="https://dbader.org/", source=None, doi=None, copyright="Dan Bader",
         )
         author = AuthorFactory(given_name="Dan", family_name="Bader")
         genre = GenreFactory()
@@ -25,22 +26,24 @@ class BookDetailTest(TestCase):
 
     def test_book_detail(self):
         expected_data = {
-            'language': 'English',
-            'publisher': 'Dan Bader',
-            'publication_date': '2017-10-25',
-            'authors': ['Dan Bader'],
-            'id': str(self.book.id),
-            'subtitle': 'A Buffet of Awesome Python Features',
-            'copyright': None,
-            'title': 'Python Tricks',
-            'issn': None,
-            'isbn': 'isbn',
-            'price': 29.99,
-            'created_at': self.book.created_at.isoformat().replace('+00:00', 'Z'),
-            'genres': ['technical'],
-            'type': 'Book',
-            'description': '...',
-            'pages': 301
+            "language": "English",
+            "publisher": "Dan Bader",
+            "publication_date": "2017-10-25",
+            "authors": ["Dan Bader"],
+            "id": str(self.book.id),
+            "subtitle": "A Buffet of Awesome Python Features",
+            "copyright": "Dan Bader",
+            "title": "Python Tricks",
+            "issn": None,
+            "isbn": "isbn",
+            "price": 29.99,
+            "created_at": self.book.created_at.isoformat().replace("+00:00", "Z"),
+            "genres": ["technical"],
+            "description": "...",
+            "pages": 301,
+            "url": "https://dbader.org/",
+            "source": None,
+            "doi": None,
         }
 
         response = self.client.get(self._get_url())
