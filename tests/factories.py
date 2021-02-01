@@ -12,7 +12,7 @@ class BookFactory(factory.alchemy.SQLAlchemyModelFactory):
     class Meta:
         model = Book
         sqlalchemy_session = db.session
-        sqlalchemy_session_persistence = 'commit'
+        sqlalchemy_session_persistence = "commit"
 
     title = faker.sentence()
     subtitle = faker.sentence()
@@ -25,7 +25,7 @@ class AuthorFactory(factory.alchemy.SQLAlchemyModelFactory):
     class Meta:
         model = Author
         sqlalchemy_session = db.session
-        sqlalchemy_session_persistence = 'commit'
+        sqlalchemy_session_persistence = "commit"
 
     given_name = faker.first_name()
     family_name = faker.last_name()
@@ -35,6 +35,6 @@ class GenreFactory(factory.alchemy.SQLAlchemyModelFactory):
     class Meta:
         model = Genre
         sqlalchemy_session = db.session
-        sqlalchemy_session_persistence = 'commit'
+        sqlalchemy_session_persistence = "commit"
 
     name = "technical"

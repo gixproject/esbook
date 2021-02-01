@@ -1,5 +1,4 @@
 import logging
-from random import choice
 
 from faker import Faker
 from flask_script import Command, Option
@@ -13,7 +12,10 @@ logger = logging.getLogger(__name__)
 
 
 class TestData(Command):
-    __doc__ = "Creates test database records."
+    """
+    Creates test database records.
+    """
+
     option_list = (Option("--count", "-c", dest="count", default=50, type=int),)
 
     def run(self, count):
@@ -23,13 +25,14 @@ class TestData(Command):
             book = Book(
                 title=faker.sentence(),
                 subtitle=faker.sentence(),
-                type=choice(["hardcover", "softcover"]),
                 publication_date=faker.date(),
                 description=faker.text(),
                 isbn=faker.isbn13(),
                 pages=faker.random_int(100, 1000),
                 price=faker.random_int(0, 50),
                 publisher=faker.word(),
+                source=faker.company(),
+                url=faker.url(),
             )
 
             for _ in range(faker.random_digit()):
@@ -38,7 +41,6 @@ class TestData(Command):
                     family_name=faker.last_name(),
                 )
                 author.save()
-                save_author_to_es(author)
                 book.authors.append(author)
 
             genre = Genre.get_or_create(name="fake")

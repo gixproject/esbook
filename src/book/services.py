@@ -3,6 +3,7 @@ import logging
 from elasticsearch.exceptions import TransportError
 from flask import current_app
 
+from author.services import save_author_to_es
 from book.schemes import BookElasticSchema
 from search.services import ElasticSearch
 
@@ -29,5 +30,9 @@ def save_book_to_es(book) -> None:
             body=BookElasticSchema().dump(book),
             id=book.id,
         )
+
+        for author in book.authors.all():
+            save_author_to_es(author)
+
     except TransportError as exc:
         logger.error("Transport error. Invalid mapping.", exc)
