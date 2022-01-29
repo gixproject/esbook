@@ -12,6 +12,16 @@ def get_indexes():
             "settings": {
                 "number_of_shards": 4,
                 "number_of_replicas": 2,
+                "analysis": {
+                    "analyzer": {
+                        "custom_analyzer": {
+                            "type": "custom",
+                            "tokenizer": "standard",
+                            "char_filter": ["html_strip"],
+                            "filter": ["asciifolding", "stop"],
+                        }
+                    }
+                },
             },
             "mappings": {
                 "dynamic": "strict",
