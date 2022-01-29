@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 
 volumes:
   postgres_data_vol:
@@ -36,8 +36,13 @@ services:
   postgres:
     image: postgres:latest
     restart: always
-    environment:
-      POSTGRES_HOST_AUTH_METHOD: trust
+    env_file:
+      - .env
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     ports:
       - "127.0.0.1:5432:5432"
     volumes:
@@ -51,9 +56,23 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     ports:
       - "127.0.0.1:5000:5000"
     entrypoint: /code/entrypoint.sh
+    volumes:
+      - .:/code
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    profiles:
+      - server
+    depends_on:
+      - web
+    ports:
+      - "80:80"
     volumes:
       - .:/code
