@@ -26,6 +26,20 @@ services:
         hard: -1
     stdin_open: true
 
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.8.1
+    ports:
+      - "127.0.0.1:9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx512m -Xms256m"
+    expose:
+      - 5044
+    depends_on:
+      - elasticsearch
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+      - ./src/esbook.log:/usr/share/logstash/esbook.log
+
   kibana:
     image: docker.elastic.co/kibana/kibana:7.8.1
     ports:

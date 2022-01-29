@@ -49,9 +49,8 @@ dictConfig(
         "version": 1,
         "formatters": {
             "default": {
-                "format": "[%(asctime)s] %(levelname)s in "
+                "format": "[%(asctime)s] %(levelname)s "
                 "%(pathname)s:%(lineno)d %(message)s",
-                "datefmt": "%Y-%m-%d %H:%M:%S",
             }
         },
         "handlers": {

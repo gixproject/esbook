@@ -31,7 +31,7 @@ Make sure **Docker** is installed on your system
 2. `make build && make up` 
 3. Open `localhost:5000`
 
-Pay attention that the config file already has defaults values
+Pay attention that the config file already has default values
 
 ## Useful actions
 ### Commands
