@@ -1,6 +1,7 @@
 # ESbook
 
 [![Build Status](https://travis-ci.org/gixproject/esbook.svg)](https://travis-ci.org/gixproject/esbook)
+[![License](https://img.shields.io/github/license/gixproject/esbook)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Coverage Status](https://coveralls.io/repos/github/gixproject/esbook/badge.svg)](https://coveralls.io/github/gixproject/esbook)
 [![Code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
@@ -26,17 +27,15 @@ Periodical updates help to keep the data fresh.
 ## Setup
 Make sure **Docker** is installed on your system
 
-Run the project in four simple steps:
-1. Copy `.env.dist` file content to `.env`
-2. Build the project `docker-compose build`
-3. Run the project `docker-compose up`
-4. Open `localhost:5000`
+1. Copy `.env.example` file content to `.env`
+2. `make build && make up` 
+3. Open `localhost:5000`
 
 Pay attention that the config file already has defaults values
 
 ## Useful actions
 ### Commands
-**To run commands use** `docker-compose exec web` to execute environment  
+**To run commands use** `make exec` to execute web container  
 To see all commands type `python manage.py`  
 
 Configure the project with test data:  

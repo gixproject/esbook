@@ -18,10 +18,10 @@ class Config:
     ELASTIC_AUTHORS_INDEX = "authors"
 
     # Database settings
-    DB_USER = os.environ.get("DB_USER", "postgres")
-    DB_PASSWORD = os.environ.get("DB_PASSWORD", "")
-    DB_HOST = os.environ.get("DB_HOST", "postgres")
-    DB_NAME = os.environ.get("DB_NAME", "postgres")
+    DB_USER = os.environ.get("POSTGRES_USER", "postgres")
+    DB_PASSWORD = os.environ.get("POSTGRES_PASSWORD", "")
+    DB_HOST = os.environ.get("POSTGRES_HOST", "postgres")
+    DB_NAME = os.environ.get("POSTGRES_DB", "postgres")
     SQLALCHEMY_DATABASE_URI = "postgresql://{}:{}@{}/{}".format(
         DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
     )
