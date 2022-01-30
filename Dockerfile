@@ -1,6 +1,4 @@
-FROM python:3.8.2
-
-EXPOSE 5000
+FROM python:3.9.9
 
 WORKDIR /code/src
 
